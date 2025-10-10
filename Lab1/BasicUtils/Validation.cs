@@ -165,11 +165,7 @@ namespace BasicUtils
         // Properties
         public bool IsValid
         {
-            get
-            {
-                IEnumerable<IRule> ret = Validate();
-                return Validate().IsEmpty();
-            }
+            get { return Validate().IsEmpty(); }
         }
 
         protected virtual IBusinessRuleSet Rules { get; set; }
