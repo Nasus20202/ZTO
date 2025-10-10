@@ -35,7 +35,7 @@ namespace TDDLab.Core.InvoiceMgmt
                     return new BusinessRule<Recipient>(
                         MethodBase.GetCurrentMethod().Name,
                         "Address should be valid",
-                        recipient => recipient != null && recipient.Address.IsValid
+                        recipient => recipient.Address != null && recipient.Address.IsValid
                     );
                 }
             }
