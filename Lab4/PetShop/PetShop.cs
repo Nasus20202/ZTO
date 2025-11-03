@@ -25,7 +25,7 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllCats()
         {
-            return _petsInTheStore.Filter((pet => pet.species == Species.Cat));
+            return _petsInTheStore.Filter(Pet.IsSpecieOf(Species.Cat));
         }
 
         public IEnumerable<Pet> AllPetsSortedByName()
@@ -37,42 +37,42 @@ namespace Training.DomainClasses
 
         public IEnumerable<Pet> AllMice()
         {
-            return _petsInTheStore.Filter((pet => pet.species == Species.Mouse));
+            return _petsInTheStore.Filter(new SpeciesCriteria(Species.Mouse));
         }
 
         public IEnumerable<Pet> AllFemalePets()
         {
-            return _petsInTheStore.Filter((pet => pet.sex == Sex.Female));
+            return _petsInTheStore.Filter(Pet.IsFemale());
         }
 
         public IEnumerable<Pet> AllCatsOrDogs()
         {
-            return _petsInTheStore.Filter((pet => pet.species == Species.Cat || pet.species == Species.Dog));
+            return _petsInTheStore.Filter(pet => pet.species == Species.Cat || pet.species == Species.Dog);
         }
 
         public IEnumerable<Pet> AllPetsButNotMice()
         {
-            return _petsInTheStore.Filter((pet => pet.species != Species.Mouse));
+            return _petsInTheStore.Filter(pet => pet.species != Species.Mouse);
         }
 
         public IEnumerable<Pet> AllPetsBornAfter2010()
         {
-            return _petsInTheStore.Filter((pet => pet.yearOfBirth > 2010));
+            return _petsInTheStore.Filter(Pet.IsBornAfter(2010));
         }
 
         public IEnumerable<Pet> AllDogsBornAfter2010()
         {
-            return _petsInTheStore.Filter((pet => pet.species == Species.Dog && pet.yearOfBirth > 2010));
+            return _petsInTheStore.Filter(pet => pet.species == Species.Dog && pet.yearOfBirth > 2010);
         }
 
         public IEnumerable<Pet> AllMaleDogs()
         {
-            return _petsInTheStore.Filter((pet => pet.species == Species.Dog && pet.sex == Sex.Male));
+            return _petsInTheStore.Filter(pet => pet.species == Species.Dog && pet.sex == Sex.Male);
         }
 
         public IEnumerable<Pet> AllPetsBornAfter2011OrRabbits()
         {
-            return _petsInTheStore.Filter((pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit));
+            return _petsInTheStore.Filter(pet => pet.yearOfBirth > 2011 || pet.species == Species.Rabbit);
         }
     }
 }
