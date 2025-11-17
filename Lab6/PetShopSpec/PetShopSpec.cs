@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Training.DomainClasses;
 using Machine.Specifications;
@@ -211,12 +211,14 @@ namespace Training.Specificaton
         };
         private It should_be_able_to_find_all_mice = () =>
         {
-            var foundPets = subject.AllMice();
+            ICriteria<Pet> criterion = Where<Pet>.HasAn(p => p.species).EqualTo(Species.Mouse);
+            var foundPets = subject.AllPets().AllItemsThat(criterion);
             foundPets.ShouldContainOnly(mouse_Dixie, mouse_Jerry);
         };
         private It should_be_able_to_find_all_female_pets = () =>
         {
-            var foundPets = subject.AllFemalePets();
+            ICriteria<Pet> criterion = Where<Pet>.HasAn(p => p.sex).EqualTo(Sex.Female);
+            var foundPets = subject.AllPets().AllItemsThat(criterion);
             foundPets.ShouldContainOnly(dog_Lassie, mouse_Dixie);
         };
         private It should_be_able_to_find_all_cats_or_dogs = () =>
@@ -263,6 +265,4 @@ namespace Training.Specificaton
                 dog_Pluto, cat_Tom);
         };
     };
-
-
 }
